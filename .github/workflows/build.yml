@@ -47,9 +47,10 @@ jobs:
         # Copy executable
         copy build\FFXVUnlocker.exe release\
 
-        # Get Qt root directory (Qt6_DIR points to lib/cmake/Qt6)
-        $qtRoot = (Resolve-Path "$env:Qt6_DIR\..\..\..").Path
-        Write-Host "Qt root directory: $qtRoot"
+        # Use QT_ROOT_DIR which is set by install-qt-action
+        $qtRoot = $env:QT_ROOT_DIR
+        Write-Host "QT_ROOT_DIR: $qtRoot"
+        Write-Host "Qt6_DIR: $env:Qt6_DIR"
 
         # Copy Qt DLLs to root
         copy "$qtRoot\bin\Qt6Core.dll" release\
