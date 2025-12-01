@@ -1,0 +1,215 @@
+# =============================================================================
+# Qt/C++ Project .gitignore
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# Build directories
+# -----------------------------------------------------------------------------
+build/
+build-*/
+out/
+cmake-build-*/
+[Bb]in/
+[Oo]bj/
+release/
+debug/
+x64/
+x86/
+
+# -----------------------------------------------------------------------------
+# CMake generated files
+# -----------------------------------------------------------------------------
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+*.cmake
+!CMakeLists.txt
+compile_commands.json
+CTestTestfile.cmake
+_deps/
+CMakeSettings.json
+CMakePresets.json
+CMakeUserPresets.json
+
+# -----------------------------------------------------------------------------
+# Qt generated files
+# -----------------------------------------------------------------------------
+*.moc
+moc_*.cpp
+moc_*.h
+qrc_*.cpp
+ui_*.h
+*.qm
+*.autosave
+.qmake.cache
+.qmake.stash
+*.pro.user
+*.pro.user.*
+*.qbs.user
+*.qbs.user.*
+*.moc.cpp
+*_autogen/
+*_resource.rc
+
+# -----------------------------------------------------------------------------
+# Compiled binaries and libraries
+# -----------------------------------------------------------------------------
+*.exe
+*.dll
+*.so
+*.so.*
+*.dylib
+*.a
+*.lib
+*.pdb
+*.ilk
+*.exp
+*.obj
+*.o
+
+# -----------------------------------------------------------------------------
+# IDE and editor files
+# -----------------------------------------------------------------------------
+
+# Visual Studio
+.vs/
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+*.sln
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.opensdf
+*.sdf
+*.VC.db
+*.VC.VC.opendb
+ipch/
+*.aps
+*.ncb
+*.opendb
+*.cachefile
+*.VC.opendb
+
+# Visual Studio Code
+.vscode/
+*.code-workspace
+.history/
+
+# CLion / JetBrains
+.idea/
+*.iml
+cmake-build-*/
+
+# Qt Creator
+*.qmlproject.user
+*.qmlproject.user.*
+
+# Xcode
+*.xcodeproj/
+*.xcworkspace/
+xcuserdata/
+DerivedData/
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# -----------------------------------------------------------------------------
+# Windows specific
+# -----------------------------------------------------------------------------
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+*.stackdump
+
+# -----------------------------------------------------------------------------
+# macOS specific
+# -----------------------------------------------------------------------------
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# -----------------------------------------------------------------------------
+# Linux specific
+# -----------------------------------------------------------------------------
+*~
+.directory
+.Trash-*
+
+# -----------------------------------------------------------------------------
+# Package/dependency directories
+# -----------------------------------------------------------------------------
+node_modules/
+vcpkg_installed/
+conan/
+
+# -----------------------------------------------------------------------------
+# Logs and temporary files
+# -----------------------------------------------------------------------------
+*.log
+*.tmp
+*.temp
+*.swp
+*.swo
+*.bak
+*.orig
+
+# -----------------------------------------------------------------------------
+# Documentation build output
+# -----------------------------------------------------------------------------
+docs/_build/
+doxygen/
+html/
+latex/
+
+# -----------------------------------------------------------------------------
+# Test and coverage
+# -----------------------------------------------------------------------------
+Testing/
+coverage/
+*.gcov
+*.gcda
+*.gcno
+
+# -----------------------------------------------------------------------------
+# Packaging
+# -----------------------------------------------------------------------------
+*.zip
+*.tar.gz
+*.7z
+*.rar
+_CPack_Packages/
+*.deb
+*.rpm
+*.msi
+*.nupkg
+
+# -----------------------------------------------------------------------------
+# Credentials and secrets (NEVER commit these)
+# -----------------------------------------------------------------------------
+*.pem
+*.key
+*.crt
+*.p12
+*.env
+*.env.*
+secrets.*
+credentials.*
+
+# -----------------------------------------------------------------------------
+# Project specific exclusions
+# -----------------------------------------------------------------------------
+
+# Cheat Engine tables (development reference only)
+docs/*.CT
+
+# Local configuration overrides
+local.cmake

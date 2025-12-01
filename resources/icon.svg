@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Background circle (dark gray/charcoal) -->
+  <circle cx="32" cy="32" r="30" fill="#2D2D32"/>
+
+  <!-- Chocobo body (light purple) -->
+  <ellipse cx="32" cy="38" rx="14" ry="12" fill="#B496DC"/>
+
+  <!-- Chocobo head (light purple) -->
+  <circle cx="38" cy="22" r="10" fill="#B496DC"/>
+
+  <!-- Head crest/plume feathers (medium purple) -->
+  <path d="M42 12 Q48 8 44 16 Q50 10 46 18 Q52 14 47 20"
+        stroke="#7850AA" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+
+  <!-- Eye -->
+  <circle cx="42" cy="21" r="3" fill="#1a1a1a"/>
+  <circle cx="43" cy="20" r="1" fill="white"/>
+
+  <!-- Beak (dark purple) -->
+  <path d="M47 24 L54 26 L47 28 Z" fill="#6441A5"/>
+
+  <!-- Wing (medium purple) -->
+  <ellipse cx="28" cy="36" rx="6" ry="8" fill="#8C64B4" transform="rotate(-15 28 36)"/>
+
+  <!-- Legs (dark purple) -->
+  <path d="M26 48 L24 56 M28 48 L26 56 M30 48 L28 56"
+        stroke="#6441A5" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M38 48 L36 56 M40 48 L38 56 M42 48 L40 56"
+        stroke="#6441A5" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- Tail feathers (medium purple) -->
+  <path d="M18 42 Q12 38 14 44 Q10 42 14 46 Q8 46 14 48"
+        stroke="#7850AA" stroke-width="2" fill="none" stroke-linecap="round"/>
+</svg>

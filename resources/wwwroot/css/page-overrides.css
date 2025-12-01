@@ -1,0 +1,441 @@
+/*!
+ * Twitch Blog - Kooky Chocobo Article
+ * Page-specific style overrides
+ *
+ * Table of Contents:
+ * 1. Header Button Fixes
+ * 2. Sidebar Fade Transitions
+ * 3. Image Zoom Styles
+ * 4. Twitch Purple Theme Colors
+ */
+
+
+/* ==========================================================================
+   1. Header Button Fixes
+   ========================================================================== */
+
+/* Fix header buttons - use original light purple colors for tint spectrum */
+.u-tintSpectrum .button.u-accentColor--buttonNormal {
+  border-color: #D7CAF5 !important;
+  color: #D7CAF5 !important;
+}
+
+.u-tintSpectrum .button.u-accentColor--buttonNormal:hover {
+  border-color: #F5EBFF !important;
+}
+
+.u-tintSpectrum .button.u-accentColor--buttonNormal .button-label {
+  color: #D7CAF5 !important;
+}
+
+
+/* ==========================================================================
+   2. Sidebar Fade Transitions (from original main-branding-base.css)
+   ========================================================================== */
+
+/* Fade in - 300ms opacity transition, visibility immediate */
+/* NOTE: fadeOut300 already exists in main-branding-base.css, only fadeIn300 is missing */
+.u-transition--fadeIn300 {
+  visibility: visible;
+  opacity: 1;
+  -webkit-transition: visibility 0s linear 0s, opacity .3s 0s;
+  transition: visibility 0s linear 0s, opacity .3s 0s;
+}
+
+
+/* ==========================================================================
+   3. Image Zoom Styles
+   ========================================================================== */
+
+/* Zoom-in cursor for zoomable elements */
+[data-action=zoom] {
+  cursor: pointer;
+  cursor: -webkit-zoom-in;
+  cursor: zoom-in;
+}
+
+/* Zoomable element base styles */
+.zoomable {
+  -webkit-transition: -webkit-transform .3s cubic-bezier(.2, 0, .2, 1);
+  transition: transform .3s cubic-bezier(.2, 0, .2, 1);
+  z-index: 800;
+}
+
+.zoomable.is-static {
+  position: relative;
+}
+
+/* White background overlay
+   The ::before creates a huge white backdrop behind the zoomed image */
+.zoomable:before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: -100vh;
+  left: -100vw;
+  width: 100%;
+  height: 100%;
+  padding: 100vh 100vw;
+  background: #fff;
+  z-index: -1;
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition: visibility 0s linear .3s, opacity .3s 0s;
+  transition: visibility 0s linear .3s, opacity .3s 0s;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+}
+
+/* White background visible when zooming */
+.zoomable.is-zooming:before {
+  visibility: visible;
+  opacity: 1;
+  -webkit-transition: visibility 0s linear 0s, opacity .3s 0s;
+  transition: visibility 0s linear 0s, opacity .3s 0s;
+}
+
+/* Zoom-out cursor when image is zoomed */
+.is-zoomLoaded[data-action=zoom] {
+  cursor: pointer;
+  cursor: -webkit-zoom-out;
+  cursor: zoom-out;
+}
+
+/* Hide header when zooming */
+body.is-zoomableActive .metabar,
+body.is-zoomableActive .postActionsBar.is-visible .postActionsBar-content {
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: opacity .2s, visibility 0s 2s, -webkit-transform .2s;
+  transition: transform .2s, opacity .2s, visibility 0s 2s;
+}
+
+body.is-zoomableActive .metabar {
+  -webkit-transform: translateY(-100%);
+  transform: translateY(-100%);
+}
+
+body.is-zoomableActive .postActionsBar.is-visible .postActionsBar-content {
+  -webkit-transform: translateY(100%);
+  transform: translateY(100%);
+}
+
+/* Hide sticky footer when zooming */
+body.is-zoomableActive .js-stickyFooter {
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: opacity .2s, visibility 0s 2s, -webkit-transform .2s;
+  transition: transform .2s, opacity .2s, visibility 0s 2s;
+  -webkit-transform: translateY(100%);
+  transform: translateY(100%);
+}
+
+
+/* ==========================================================================
+   4. Twitch Purple Theme Colors
+   ========================================================================== */
+
+/* --- Accent Colors (used throughout the page) --- */
+
+.u-accentColor--borderLight {
+  border-color: #9271D7 !important;
+}
+
+.u-accentColor--borderNormal {
+  border-color: #9271D7 !important;
+}
+
+.u-accentColor--borderDark {
+  border-color: #7C63B4 !important;
+}
+
+.u-accentColor--iconLight .svgIcon,
+.u-accentColor--iconLight.svgIcon {
+  fill: #9271D7 !important;
+}
+
+.u-accentColor--iconNormal .svgIcon,
+.u-accentColor--iconNormal.svgIcon {
+  fill: #9271D7 !important;
+}
+
+.u-accentColor--iconDark .svgIcon,
+.u-accentColor--iconDark.svgIcon {
+  fill: #7C63B4 !important;
+}
+
+.u-accentColor--textNormal {
+  color: #7C63B4 !important;
+}
+
+.u-accentColor--hoverTextNormal:hover {
+  color: #7C63B4 !important;
+}
+
+.u-accentColor--textNormal.u-accentColor--textDarken:hover {
+  color: #715CA2 !important;
+}
+
+.u-accentColor--textDark {
+  color: #715CA2 !important;
+}
+
+.u-accentColor--backgroundLight {
+  background-color: #9271D7 !important;
+}
+
+.u-accentColor--backgroundNormal {
+  background-color: #9271D7 !important;
+}
+
+.u-accentColor--backgroundDark {
+  background-color: #7C63B4 !important;
+}
+
+.u-accentColor--buttonDark {
+  border-color: #7C63B4 !important;
+  color: #715CA2 !important;
+}
+
+.u-accentColor--buttonDark:hover {
+  border-color: #715CA2 !important;
+}
+
+.u-accentColor--buttonDark .icon:before,
+.u-accentColor--buttonDark .svgIcon {
+  color: #7C63B4 !important;
+  fill: #7C63B4 !important;
+}
+
+.u-accentColor--buttonNormal:not(.clapButton--largePill) {
+  border-color: #9271D7 !important;
+  color: #7C63B4 !important;
+}
+
+.u-accentColor--buttonNormal:hover {
+  border-color: #7C63B4 !important;
+}
+
+.u-accentColor--buttonNormal .icon:before,
+.u-accentColor--buttonNormal .svgIcon {
+  color: #9271D7 !important;
+  fill: #9271D7 !important;
+}
+
+.u-accentColor--buttonNormal.button--filled .icon:before,
+.u-accentColor--buttonNormal.button--filled .svgIcon {
+  color: rgba(255, 255, 255, 1) !important;
+  fill: rgba(255, 255, 255, 1) !important;
+}
+
+.u-accentColor--buttonDark.button--filled,
+.u-accentColor--buttonDark.button--withChrome.is-active,
+.u-accentColor--fillWhenActive.is-active {
+  background-color: #7C63B4 !important;
+  border-color: #7C63B4 !important;
+  color: rgba(255, 255, 255, 1) !important;
+  fill: rgba(255, 255, 255, 1) !important;
+}
+
+.u-accentColor--buttonNormal.button--filled:not(.clapButton--largePill),
+.u-accentColor--buttonNormal.button--withChrome.is-active:not(.clapButton--largePill) {
+  background-color: #9271D7 !important;
+  border-color: #9271D7 !important;
+  color: rgba(255, 255, 255, 1) !important;
+  fill: rgba(255, 255, 255, 1) !important;
+}
+
+.postArticle.is-withAccentColors .markup--user,
+.postArticle.is-withAccentColors .markup--query {
+  color: #7C63B4 !important;
+}
+
+
+/* --- Tint Background Color (header bar) --- */
+
+.u-tintBgColor {
+  background-color: rgba(100, 65, 165, 1) !important;
+}
+
+.u-tintBgColor .u-fadeLeft:before {
+  background-image: linear-gradient(to right, rgba(100, 65, 165, 1) 0%, rgba(100, 65, 165, 0) 100%) !important;
+}
+
+.u-tintBgColor .u-fadeRight:after {
+  background-image: linear-gradient(to right, rgba(100, 65, 165, 0) 0%, rgba(100, 65, 165, 1) 100%) !important;
+}
+
+
+/* --- Tint Spectrum (colors for elements on purple background) --- */
+
+.u-tintSpectrum .u-baseColor--borderLight {
+  border-color: #B8A7E1 !important;
+}
+
+.u-tintSpectrum .u-baseColor--borderNormal {
+  border-color: #D7CAF5 !important;
+}
+
+.u-tintSpectrum .u-baseColor--borderDark {
+  border-color: #F5EBFF !important;
+}
+
+.u-tintSpectrum .u-baseColor--iconLight .svgIcon,
+.u-tintSpectrum .u-baseColor--iconLight.svgIcon {
+  fill: #B8A7E1 !important;
+}
+
+.u-tintSpectrum .u-baseColor--iconNormal .svgIcon,
+.u-tintSpectrum .u-baseColor--iconNormal.svgIcon {
+  fill: #D7CAF5 !important;
+}
+
+.u-tintSpectrum .u-baseColor--iconDark .svgIcon,
+.u-tintSpectrum .u-baseColor--iconDark.svgIcon {
+  fill: #F5EBFF !important;
+}
+
+.u-tintSpectrum .u-baseColor--textNormal {
+  color: #D7CAF5 !important;
+}
+
+.u-tintSpectrum .u-baseColor--textNormal.u-baseColor--textDarken:hover {
+  color: #FFFBFF !important;
+}
+
+.u-tintSpectrum .u-baseColor--textDark {
+  color: #FFFBFF !important;
+}
+
+.u-tintSpectrum .u-baseColor--textDarker {
+  color: #FFFBFF !important;
+}
+
+.u-tintSpectrum .u-baseColor--backgroundLight {
+  background-color: #B8A7E1 !important;
+}
+
+.u-tintSpectrum .u-baseColor--backgroundNormal {
+  background-color: #D7CAF5 !important;
+}
+
+.u-tintSpectrum .u-baseColor--backgroundDark {
+  background-color: #F5EBFF !important;
+}
+
+.u-tintSpectrum .u-baseColor--buttonLight {
+  border-color: #B8A7E1 !important;
+  color: #B8A7E1 !important;
+}
+
+.u-tintSpectrum .u-baseColor--buttonLight:hover {
+  border-color: #B8A7E1 !important;
+}
+
+.u-tintSpectrum .u-baseColor--buttonLight .icon:before,
+.u-tintSpectrum .u-baseColor--buttonLight .svgIcon {
+  color: #B8A7E1 !important;
+  fill: #B8A7E1 !important;
+}
+
+.u-tintSpectrum .u-baseColor--buttonDark {
+  border-color: #F5EBFF !important;
+  color: #FFFBFF !important;
+}
+
+.u-tintSpectrum .u-baseColor--buttonDark:hover {
+  border-color: #FFFBFF !important;
+}
+
+.u-tintSpectrum .u-baseColor--buttonDark .icon:before,
+.u-tintSpectrum .u-baseColor--buttonDark .svgIcon {
+  color: #F5EBFF !important;
+  fill: #F5EBFF !important;
+}
+
+.u-tintSpectrum .u-baseColor--buttonNormal {
+  border-color: #D7CAF5 !important;
+  color: #D7CAF5 !important;
+}
+
+.u-tintSpectrum .u-baseColor--buttonNormal:hover {
+  border-color: #F5EBFF !important;
+}
+
+.u-tintSpectrum .u-baseColor--buttonNormal .icon:before,
+.u-tintSpectrum .u-baseColor--buttonNormal .svgIcon {
+  color: #D7CAF5 !important;
+  fill: #D7CAF5 !important;
+}
+
+.u-tintSpectrum .u-baseColor--buttonDark.button--filled,
+.u-tintSpectrum .u-baseColor--buttonDark.button--withChrome.is-active {
+  background-color: #F5EBFF !important;
+  border-color: #F5EBFF !important;
+  color: rgba(100, 65, 165, 1) !important;
+  fill: rgba(100, 65, 165, 1) !important;
+}
+
+.u-tintSpectrum .u-baseColor--buttonNormal.button--filled,
+.u-tintSpectrum .u-baseColor--buttonNormal.button--withChrome.is-active {
+  background-color: #D7CAF5 !important;
+  border-color: #D7CAF5 !important;
+  color: rgba(100, 65, 165, 1) !important;
+  fill: rgba(100, 65, 165, 1) !important;
+}
+
+.u-tintSpectrum .u-baseColor--link {
+  color: #D7CAF5 !important;
+}
+
+.u-tintSpectrum .u-baseColor--link.link--darkenOnHover:hover {
+  color: #FFFBFF !important;
+}
+
+.u-tintSpectrum .u-baseColor--link.link--darken:hover,
+.u-tintSpectrum .u-baseColor--link.link--darken:focus,
+.u-tintSpectrum .u-baseColor--link.link--darken:active {
+  color: #FFFBFF !important;
+}
+
+.u-tintSpectrum .u-baseColor--link.link--dark {
+  color: #FFFBFF !important;
+}
+
+.u-tintSpectrum .u-baseColor--link.link--dark.link--darken:hover,
+.u-tintSpectrum .u-baseColor--link.link--dark.link--darken:focus,
+.u-tintSpectrum .u-baseColor--link.link--dark.link--darken:active {
+  color: #FFFBFF !important;
+}
+
+.u-tintSpectrum .u-baseColor--link.link--darker {
+  color: #FFFBFF !important;
+}
+
+.u-tintSpectrum .svgIcon--logoMonogram {
+  stroke: none !important;
+  fill: #FFFBFF !important;
+}
+
+.u-tintSpectrum .ui-h1,
+.u-tintSpectrum .ui-h2,
+.u-tintSpectrum .ui-h3,
+.u-tintSpectrum .ui-h4,
+.u-tintSpectrum .ui-brand1,
+.u-tintSpectrum .ui-brand2,
+.u-tintSpectrum .ui-captionStrong {
+  color: #FFFBFF !important;
+  fill: #FFFBFF !important;
+}
+
+.u-tintSpectrum .ui-body,
+.u-tintSpectrum .ui-caps {
+  color: #FFFBFF !important;
+  fill: #FFFBFF !important;
+}
+
+.u-tintSpectrum .ui-summary,
+.u-tintSpectrum .ui-caption {
+  color: #B8A7E1 !important;
+  fill: #B8A7E1 !important;
+}

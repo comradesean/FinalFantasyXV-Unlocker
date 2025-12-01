@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" data-passport-version="5">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="shortcut icon" href="../assets/img/favicon.png" type="image/x-icon"/>
+    <title>Login</title>
+    <base target="_self" />
+</head>
+<body class="kraken-page">
+    <div class="container" role="main">
+        <div class="authorize">
+            <div class="wrap">
+                <div class="header clearfix">
+                    <a id="header_logo">
+                        <svg class="svg-logo_twitch" version="1.1" viewBox="-2.5 0 100 50" x="0px" y="0px">
+                            <path clip-rule="evenodd" d="M88,5h-6V0h-9l-6,5h-5.5L59,7.5V5h-5V0H36v5H16l-5-5H0v22l5,5.25L14,32h6v-1.5l3,1.5h12l2-3l1,3h7v-3l3,3h8l0.5-3l2.5,3h10l3-3v3h4l3-3v3h7l7-6V10L88,5z M13,13H8v6h5v6H6l-4-4V2h6v5h5V13z M36,21.5L32.5,25H15V7h6v12h2V7h6v12h2V7h5V21.5z M44,25h-6V7h6V25z M44,5h-6V2h6V5z M57,13h-5v6h5v6h-7l-4-4V2h6v5h5V13z M72,13h-7v6h7v6h-9l-4-4V11l4-4h9V13z M91,25h-6V13h-5v12h-6V2h6v5h7l4,4V25z" fill-rule="evenodd"></path>
+                        </svg>
+                    </a>
+                </div>
+                <div class="card">
+                    <div class="text-content">
+                        <div class="item">
+                            <ul class="tabs">
+                                <li id="login_tab" class="tab selected"><a target="_self" href="#">Log In</a></li>
+                                <li id="signup_tab" class="tab"><a target="_self" href="#">Sign Up</a></li>
+                            </ul>
+                        </div>
+                        <div class="item">
+                            <form method="post" action="/sessions/new" id="loginForm" class="col-md-6">
+                                <div class="field item">
+                                    <label for="username">Username</label>
+                                    <input autofocus autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" type="text" name="username" id="username" class="text" value="Chocobro15" disabled />
+                                </div>
+                                <div class="field item" id="password">
+                                    <label for="password">Password</label>
+                                    <input autocapitalize="none" type="password" name="password" class="text" value="Chocobro15" disabled />
+                                    <div class="help sub">
+                                        <a id="reset" href="#" target="_blank" class="small">Trouble logging in?</a>
+                                    </div>
+                                </div>
+                                <div class="buttons">
+                                    <button id="login-button" class="primary button js-login-button" type="submit">
+                                        <span class="js-login-text">Log In</span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="fb-root"></div>
+        </div>
+    </div>
+    <input type="hidden" name="lang" value="en" />
+    <script src="scripts/popup.js"></script>
+    <script src="scripts/auth.js"></script>
+</body>
+</html>
