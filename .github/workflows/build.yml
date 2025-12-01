@@ -1,0 +1,99 @@
+name: Build
+
+on:
+  push:
+    branches: [ main, master ]
+    tags:
+      - 'v*'
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v4
+      with:
+        version: '6.7.2'
+        host: 'windows'
+        target: 'desktop'
+        arch: 'win64_mingw'
+        modules: 'qtnetworkauth'
+        tools: 'tools_mingw1310'
+
+    - name: Configure CMake
+      run: |
+        mkdir build
+        cd build
+        cmake -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release ..
+
+    - name: Build
+      run: |
+        cd build
+        cmake --build . --config Release
+
+    - name: Prepare Release Package
+      run: |
+        mkdir release
+        mkdir release\plugins
+        mkdir release\plugins\platforms
+        mkdir release\plugins\styles
+
+        # Copy executable
+        copy build\FFXVUnlocker.exe release\
+
+        # Copy Qt DLLs to root
+        copy $env:Qt6_DIR\..\..\..\bin\Qt6Core.dll release\
+        copy $env:Qt6_DIR\..\..\..\bin\Qt6Gui.dll release\
+        copy $env:Qt6_DIR\..\..\..\bin\Qt6Widgets.dll release\
+        copy $env:Qt6_DIR\..\..\..\bin\Qt6Network.dll release\
+
+        # Copy Qt plugins to plugins folder
+        copy $env:Qt6_DIR\..\..\..\plugins\platforms\qwindows.dll release\plugins\platforms\
+        copy $env:Qt6_DIR\..\..\..\plugins\styles\qmodernwindowsstyle.dll release\plugins\styles\
+
+        # Copy MinGW runtime DLLs
+        copy $env:IQTA_TOOLS\mingw1310_64\bin\libgcc_s_seh-1.dll release\
+        copy $env:IQTA_TOOLS\mingw1310_64\bin\libstdc++-6.dll release\
+        copy $env:IQTA_TOOLS\mingw1310_64\bin\libwinpthread-1.dll release\
+
+        # Create qt.conf to tell Qt where plugins are
+        echo "[Paths]" > release\qt.conf
+        echo "Plugins = plugins" >> release\qt.conf
+      shell: pwsh
+
+    - name: Upload Build Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: FFXVUnlocker-Windows-x64
+        path: release/
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
+
+    steps:
+    - name: Download Artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: FFXVUnlocker-Windows-x64
+        path: FFXVUnlocker
+
+    - name: Create ZIP
+      run: |
+        cd FFXVUnlocker
+        zip -r ../FFXVUnlocker-${{ github.ref_name }}-Windows-x64.zip .
+
+    - name: Create GitHub Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: FFXVUnlocker-${{ github.ref_name }}-Windows-x64.zip
+        generate_release_notes: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
