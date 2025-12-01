@@ -56,53 +56,58 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     psapi       # Process API for memory operations
 )
 
-# Copy qt.conf to build directory (tells Qt to look for plugins in ./plugins)
-add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy
-    "${CMAKE_SOURCE_DIR}/resources/qt.conf"
-    "$<TARGET_FILE_DIR:${PROJECT_NAME}>/qt.conf"
-)
+# Option to skip post-build copy (for CI builds that handle this separately)
+option(SKIP_POST_BUILD_COPY "Skip post-build DLL copying" OFF)
 
-# Copy required Qt DLLs to build directory
-add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        "${Qt6_DIR}/../../../bin/Qt6Core.dll"
-        "$<TARGET_FILE_DIR:${PROJECT_NAME}>/"
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        "${Qt6_DIR}/../../../bin/Qt6Gui.dll"
-        "$<TARGET_FILE_DIR:${PROJECT_NAME}>/"
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        "${Qt6_DIR}/../../../bin/Qt6Widgets.dll"
-        "$<TARGET_FILE_DIR:${PROJECT_NAME}>/"
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        "${Qt6_DIR}/../../../bin/Qt6Network.dll"
-        "$<TARGET_FILE_DIR:${PROJECT_NAME}>/"
-    COMMENT "Copying Qt DLLs"
-)
+if(NOT SKIP_POST_BUILD_COPY)
+    # Copy qt.conf to build directory (tells Qt to look for plugins in ./plugins)
+    add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy
+        "${CMAKE_SOURCE_DIR}/resources/qt.conf"
+        "$<TARGET_FILE_DIR:${PROJECT_NAME}>/qt.conf"
+    )
 
-# Copy MinGW runtime DLLs
-add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        "C:/Qt/Tools/mingw1310_64/bin/libgcc_s_seh-1.dll"
-        "$<TARGET_FILE_DIR:${PROJECT_NAME}>/"
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        "C:/Qt/Tools/mingw1310_64/bin/libstdc++-6.dll"
-        "$<TARGET_FILE_DIR:${PROJECT_NAME}>/"
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        "C:/Qt/Tools/mingw1310_64/bin/libwinpthread-1.dll"
-        "$<TARGET_FILE_DIR:${PROJECT_NAME}>/"
-    COMMENT "Copying MinGW runtime DLLs"
-)
+    # Copy required Qt DLLs to build directory
+    add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            "${Qt6_DIR}/../../../bin/Qt6Core.dll"
+            "$<TARGET_FILE_DIR:${PROJECT_NAME}>/"
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            "${Qt6_DIR}/../../../bin/Qt6Gui.dll"
+            "$<TARGET_FILE_DIR:${PROJECT_NAME}>/"
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            "${Qt6_DIR}/../../../bin/Qt6Widgets.dll"
+            "$<TARGET_FILE_DIR:${PROJECT_NAME}>/"
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            "${Qt6_DIR}/../../../bin/Qt6Network.dll"
+            "$<TARGET_FILE_DIR:${PROJECT_NAME}>/"
+        COMMENT "Copying Qt DLLs"
+    )
 
-# Create plugins directory structure and copy Qt plugins
-add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E make_directory "$<TARGET_FILE_DIR:${PROJECT_NAME}>/plugins/platforms"
-    COMMAND ${CMAKE_COMMAND} -E make_directory "$<TARGET_FILE_DIR:${PROJECT_NAME}>/plugins/styles"
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        "${Qt6_DIR}/../../../plugins/platforms/qwindows.dll"
-        "$<TARGET_FILE_DIR:${PROJECT_NAME}>/plugins/platforms/"
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        "${Qt6_DIR}/../../../plugins/styles/qmodernwindowsstyle.dll"
-        "$<TARGET_FILE_DIR:${PROJECT_NAME}>/plugins/styles/"
-    COMMENT "Copying Qt plugins to plugins folder"
-)
+    # Copy MinGW runtime DLLs (local development path)
+    add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            "C:/Qt/Tools/mingw1310_64/bin/libgcc_s_seh-1.dll"
+            "$<TARGET_FILE_DIR:${PROJECT_NAME}>/"
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            "C:/Qt/Tools/mingw1310_64/bin/libstdc++-6.dll"
+            "$<TARGET_FILE_DIR:${PROJECT_NAME}>/"
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            "C:/Qt/Tools/mingw1310_64/bin/libwinpthread-1.dll"
+            "$<TARGET_FILE_DIR:${PROJECT_NAME}>/"
+        COMMENT "Copying MinGW runtime DLLs"
+    )
+
+    # Create plugins directory structure and copy Qt plugins
+    add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E make_directory "$<TARGET_FILE_DIR:${PROJECT_NAME}>/plugins/platforms"
+        COMMAND ${CMAKE_COMMAND} -E make_directory "$<TARGET_FILE_DIR:${PROJECT_NAME}>/plugins/styles"
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            "${Qt6_DIR}/../../../plugins/platforms/qwindows.dll"
+            "$<TARGET_FILE_DIR:${PROJECT_NAME}>/plugins/platforms/"
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            "${Qt6_DIR}/../../../plugins/styles/qmodernwindowsstyle.dll"
+            "$<TARGET_FILE_DIR:${PROJECT_NAME}>/plugins/styles/"
+        COMMENT "Copying Qt plugins to plugins folder"
+    )
+endif()
