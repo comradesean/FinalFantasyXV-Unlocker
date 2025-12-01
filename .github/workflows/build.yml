@@ -47,15 +47,19 @@ jobs:
         # Copy executable
         copy build\FFXVUnlocker.exe release\
 
+        # Get Qt root directory (Qt6_DIR points to lib/cmake/Qt6)
+        $qtRoot = (Resolve-Path "$env:Qt6_DIR\..\..\..").Path
+        Write-Host "Qt root directory: $qtRoot"
+
         # Copy Qt DLLs to root
-        copy $env:Qt6_DIR\..\..\..\bin\Qt6Core.dll release\
-        copy $env:Qt6_DIR\..\..\..\bin\Qt6Gui.dll release\
-        copy $env:Qt6_DIR\..\..\..\bin\Qt6Widgets.dll release\
-        copy $env:Qt6_DIR\..\..\..\bin\Qt6Network.dll release\
+        copy "$qtRoot\bin\Qt6Core.dll" release\
+        copy "$qtRoot\bin\Qt6Gui.dll" release\
+        copy "$qtRoot\bin\Qt6Widgets.dll" release\
+        copy "$qtRoot\bin\Qt6Network.dll" release\
 
         # Copy Qt plugins to plugins folder
-        copy $env:Qt6_DIR\..\..\..\plugins\platforms\qwindows.dll release\plugins\platforms\
-        copy $env:Qt6_DIR\..\..\..\plugins\styles\qmodernwindowsstyle.dll release\plugins\styles\
+        copy "$qtRoot\plugins\platforms\qwindows.dll" release\plugins\platforms\
+        copy "$qtRoot\plugins\styles\qmodernwindowsstyle.dll" release\plugins\styles\
 
         # Copy MinGW runtime DLLs
         copy $env:IQTA_TOOLS\mingw1310_64\bin\libgcc_s_seh-1.dll release\
